@@ -9,36 +9,34 @@ import {
     envoyerPosition, 
     consulterHistoriqueCourses, 
     consulterNotificationsChauffeur 
-} from './controllers/driverController.js';
-import { verifyToken } from './middlewares/authMiddleware.js'; // Assuming you have an authentication middleware
+} from '../controllers/chauffeurController.js';
 
-const router = express.Router();
+const chauffeurRouter = express.Router();
 
-// Connexion d'un chauffeur
-router.post('/connexion', chauffeurConnexion);
+chauffeurRouter.post('/connexion', chauffeurConnexion);
 
 // Consulte le profil
-router.get('/profil', verifyToken, consulterProfilChauffeur);
+chauffeurRouter.get('/profil', consulterProfilChauffeur);
 
 // Liste des évaluations
-router.get('/evaluations', verifyToken, consulterEvaluations);
+chauffeurRouter.get('/evaluations',  consulterEvaluations);
 
 // Liste des demandes de course
-router.get('/demandes', verifyToken, consulterListeCourse);
+chauffeurRouter.get('/demandes', consulterListeCourse);
 
 // Acceptation d'une course
-router.put('/course/:id/accepter', verifyToken, accepterCourse);
+chauffeurRouter.put('/course/:id/accepter',  accepterCourse);
 
 // Indisponible pour une course
-router.put('/course/:id/indisponible', verifyToken, courseIndisponible);
+chauffeurRouter.put('/course/:id/indisponible', courseIndisponible);
 
 // Envoi de localisation
-router.post('/position', verifyToken, envoyerPosition);
+chauffeurRouter.post('/position', envoyerPosition);
 
 // Historique des courses
-router.get('/historique-courses', verifyToken, consulterHistoriqueCourses);
+chauffeurRouter.get('/historique-courses',  consulterHistoriqueCourses);
 
 // Récupération des notifications pour un chauffeur
-router.get('/notifications', verifyToken, consulterNotificationsChauffeur);
+chauffeurRouter.get('/notifications',  consulterNotificationsChauffeur);
 
-export default router;
+export default chauffeurRouter;

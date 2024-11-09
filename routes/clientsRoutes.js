@@ -14,51 +14,50 @@ import {
     consulterNotificationsClients, 
     motDePasseOublier, 
     reinitialiserMotDePasse 
-} from './controllers/clientController.js';
-import { verifyToken } from './middlewares/authMiddleware.js'; // Assume you have an authentication middleware
+} from '../controllers/clientController.js';
 
-const router = express.Router();
+const clientRouter = express.Router();
 
 // Inscription d'un client
-router.post('/inscription', inscriptionClient);
+clientRouter.post('/inscription', inscriptionClient);
 
 // Connexion d'un client
-router.post('/connexion', clientConnexion);
+clientRouter.post('/connexion', clientConnexion);
 
 // Demande d'une course
-router.post('/course/demander', verifyToken, demanderUneCourse);
+clientRouter.post('/course/demander', demanderUneCourse);
 
 // Détails d'une course spécifique
-router.get('/course/:id', verifyToken, consulterDetailCourse);
+clientRouter.get('/course/:id', consulterDetailCourse);
 
 // Récupération de l'historique des courses pour un client
-router.get('/historique-courses', verifyToken, consulterHistoriqueCoursesClient);
+clientRouter.get('/historique-courses', consulterHistoriqueCoursesClient);
 
 // Annulation d'une course
-router.delete('/course/:id', verifyToken, annulerCourse);
+clientRouter.delete('/course/:id', annulerCourse);
 
 // Récupération du profil
-router.get('/profil', verifyToken, consulterProfilClient);
+clientRouter.get('/profil', consulterProfilClient);
 
 // Mise à jour du profil
-router.put('/profil', verifyToken, mettreAjourProfil);
+clientRouter.put('/profil', mettreAjourProfil);
 
 // Récupération des évaluations d'un chauffeur
-router.get('/chauffeur/:chauffeurId/evaluations', consulterEvaluationsChauffeur);
+clientRouter.get('/chauffeur/:Id/evaluations', consulterEvaluationsChauffeur);
 
 // Évaluation d'une course
-router.post('/course/:id/evaluer', verifyToken, evaluerCourse);
+clientRouter.post('/course/:id/evaluer', evaluerCourse);
 
 // Ajout d'un paiement
-router.post('/paiement', verifyToken, ajouterPaiement);
+clientRouter.post('/paiement', ajouterPaiement);
 
 // Récupération des notifications pour un client
-router.get('/notifications', verifyToken, consulterNotificationsClients);
+clientRouter.get('/notifications', consulterNotificationsClients);
 
 // Mot de passe oublié
-router.post('/mot-de-passe-oublie', motDePasseOublier);
+clientRouter.post('/mot-de-passe-oublie', motDePasseOublier);
 
 // Réinitialisation du mot de passe
-router.put('/reinitialiser-mot-de-passe', reinitialiserMotDePasse);
+clientRouter.put('/reinitialiser-mot-de-passe', reinitialiserMotDePasse);
 
-export default router;
+export default clientRouter;
